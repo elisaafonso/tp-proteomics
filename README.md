@@ -1,10 +1,10 @@
 # TP de Protéomique MADP 2022
+
 ## Contexte Biologique
+
 Vous allez utiliser des outils informatiques qui vous permettront d’analyser des données brutes issues d’une analyse Shotgun Proteomics récemment publiée dans le journal Science sous le titre "Real-time visualization of drug resistance acquisition by horizontal gene transfer reveals a new role for AcrAB-TolC multidrug efflux pump".
 
 Les données associées à cette publication sont publiques et accessibles sur la plateforme [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD011286). Le PDF de la publication est [`data/Nolivos_2019.pdf`](data/Nolivos_2019.pdf).
-
-
 
 ## Mise en place
 
@@ -19,8 +19,8 @@ Vous éditerez ce fichier `README.md` pour répondre aux questions dans les enca
 Seul le langage Python (v3.X) est requis pour ce travail.
 Il vous est conseillé d'installer un environnement virtuel python pour installer les libraries requises independamment de votre systèmes d'exploitation.
 
-* Le systême de gestion de paquets [Conda](https://docs.conda.io/en/latest/) est très pratique et disponible pour la plupat des systèmes d'exploitation. Une version légère suffisante pour nos besoin est téléchargeable [ici](https://docs.conda.io/en/latest/miniconda.html)
-* Si vous disposez d'un interpreteur python 3.X installé sur votre systême [virtualenv](https://docs.python.org/3/library/venv.html) est désormais "built-in" (cf. Procédure virtualenv).
+- Le systême de gestion de paquets [Conda](https://docs.conda.io/en/latest/) est très pratique et disponible pour la plupat des systèmes d'exploitation. Une version légère suffisante pour nos besoin est téléchargeable [ici](https://docs.conda.io/en/latest/miniconda.html)
+- Si vous disposez d'un interpreteur python 3.X installé sur votre systême [virtualenv](https://docs.python.org/3/library/venv.html) est désormais "built-in" (cf. Procédure virtualenv).
 
 #### Procédure conda
 
@@ -30,13 +30,16 @@ Depuis le repertoire de votre repository Git, installez le package scipy et lanc
 $PATH_TO_CONDA_DIR/bin/conda install -c conda-forge scipy notebook matplotlib
 $PATH_TO_CONDA_DIR/bin/jupyter notebook
 ```
+
 #### Procédure Master BIOINFO LYON1
+
 Votre compte du master vous donne accès à une instance **JupyterHub** sur pédago service: `http://pedago-service.univ-lyon1.fr:8000`
+
 #### Procédure virtualenv
 
 Créer l'environnement virtuel.
 
-```python -m venv MADP_TP```
+`python -m venv MADP_TP`
 
 Activer l'environnement virtuel et installer les packages.
 
@@ -44,13 +47,13 @@ Activer l'environnement virtuel et installer les packages.
 source MADP_TP1/bin/activate
 pip install --user ipykernel scipy notebook matplotlib
 ```
+
 #### Procédure VM IFB
 
 Une "appliance" IFB a été préparée avec les dépendances Python requises.
 Elle est accessible [ici](https://biosphere.france-bioinformatique.fr/catalogue/appliance/160/).
 Jupyter vous permettra d'ouvrir des terminaux SHELL et des notebook Python.
 Le repertoire racine de Jupyter est `/mnt/mydatalocal/`
-
 
 #### Intégration des environnements au notebook
 
@@ -60,12 +63,11 @@ Il peut être pratique d'ajouter votre environnement à Jupyter. Cela se réalis
 python -m ipykernel install --user --name=MADP_TP
 ```
 
-
 Jupyter est une environnement de type notebook permettant l'exécution de code python dans des cellules avec une persitance des variables entre chaque évaluation de cellule. Jupyter fournit nativement le support de la librarie graphique matplotlib.
 
 ### Test de l'installation
 
-Dans l'interface de jupyter, créez un nouveau fichier notebook (*.ipynb) localisé dans votre repertoire git.
+Dans l'interface de jupyter, créez un nouveau fichier notebook (\*.ipynb) localisé dans votre repertoire git.
 Dans la première cellule copiez le code suivant:
 
 ```python
@@ -91,10 +93,10 @@ ax.plot(x, np.full(len(x), 0.2),
 fig.show()
 ```
 
-* Creation des objets `fig`et `ax`
-* Ajout successif de graphiques sur la même figure par l'appel à des methodes de l'objet `ax`
-* Affichage de la figure complète via `fig.show()`
-* Evaluation de la cellule pour visualisation dans la cellule de résultats.
+- Creation des objets `fig`et `ax`
+- Ajout successif de graphiques sur la même figure par l'appel à des methodes de l'objet `ax`
+- Affichage de la figure complète via `fig.show()`
+- Evaluation de la cellule pour visualisation dans la cellule de résultats.
 
 L'affichage dans la cellule de rendu du notebook devrait confirmer la bonne installation des dépendances.
 
@@ -106,20 +108,19 @@ La documentation matplotlib est bien faite, mais **attention** il vous est deman
 
 ### Mesures experimentales
 
-Un fichier `data/TCL_wt1.tsv` contient les données d'abondances differentielles mesurées sur une souche sauvage d'*Escherichia coli* entre deux conditions: avec Tetracycline et en milieu riche. Le contrôle est le milieu riche.
+Un fichier `data/TCL_wt1.tsv` contient les données d'abondances differentielles mesurées sur une souche sauvage d'_Escherichia coli_ entre deux conditions: avec Tetracycline et en milieu riche. Le contrôle est le milieu riche.
 
-| Accession | Description | Gene Symbol  |   Corrected Abundance ratio (1.53)    | Log2 Corrected Abundance Ratio | Abundance Ratio Adj. P-Value |   -LOG10 Adj.P-val |
-| --- | --- | --- | --- | --- | --- | ---|
-| [Accesseur Uniprot](https://www.uniprot.org/help/accession_numbers)  | Texte libre | Texte libre  |  $\frac{ \text{WildType}\_{\text{Tc}} }{ \text{WildType}\_{\text{rich}} }$ |$Log_2(\frac{\text{WildType}\_{\text{Tc}}}{\text{WildType}\_{\text{rich}}})$  | $\mathbb{R}^{+}$ |  $\mathbb{R}^{+}$  |
+| Accession                                                           | Description | Gene Symbol | Corrected Abundance ratio (1.53)                                          | Log2 Corrected Abundance Ratio                                               | Abundance Ratio Adj. P-Value | -LOG10 Adj.P-val |
+| ------------------------------------------------------------------- | ----------- | ----------- | ------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------- | ---------------- |
+| [Accesseur Uniprot](https://www.uniprot.org/help/accession_numbers) | Texte libre | Texte libre | $\frac{ \text{WildType}\_{\text{Tc}} }{ \text{WildType}\_{\text{rich}} }$ | $Log_2(\frac{\text{WildType}\_{\text{Tc}}}{\text{WildType}\_{\text{rich}}})$ | $\mathbb{R}^{+}$             | $\mathbb{R}^{+}$ |
 
 <!-- | [Accesseur Uniprot](https://www.uniprot.org/help/accession_numbers)  | Texte libre | Texte libre  | <img src="https://render.githubusercontent.com/render/math?math=\frac{\text{WildType}_{\text{Tc}}}{\text{WildType}_{\text{rich}}}"> | <img src="https://render.githubusercontent.com/render/math?math=Log_2(\frac{\text{WildType}_{\text{Tc}}}{\text{WildType}_{\text{rich}}})">  | <img src="https://render.githubusercontent.com/render/math?math=\mathbb{R}^%2B"> | <img src="https://render.githubusercontent.com/render/math?math=\mathbb{R}^%2B">  | -->
-
 
 Attention certaines valeurs numériques sont manquantes ou erronées, constatez par vous même en parcourant rapidement le fichier.
 
 ### Fiches uniprot
 
-Les fiches de toutes les protéines de *E.coli* sont stockées dans un seul document XML `data/uniprot-proteome_UP000000625.xml`. Nous allons extraire de ce fichier les informations dont nous aurons besoin, à l'aide du module de la librarie standard [XML.etree](https://docs.python.org/3/library/xml.etree.elementtree.html#module-xml.etree.ElementTree). Pour vous facilitez la tâche, les exemples suivants vous sont fournis. Prenez le temps de les executer et de les modifier dans un notebook. Vous vous familliariserez ainsi avec la structure du document XML que vous pouvez egalement inspecter dans un navigateur.
+Les fiches de toutes les protéines de _E.coli_ sont stockées dans un seul document XML `data/uniprot-proteome_UP000000625.xml`. Nous allons extraire de ce fichier les informations dont nous aurons besoin, à l'aide du module de la librarie standard [XML.etree](https://docs.python.org/3/library/xml.etree.elementtree.html#module-xml.etree.ElementTree). Pour vous facilitez la tâche, les exemples suivants vous sont fournis. Prenez le temps de les executer et de les modifier dans un notebook. Vous vous familliariserez ainsi avec la structure du document XML que vous pouvez egalement inspecter dans un navigateur.
 
 ```python
 from xml.etree.ElementTree import parse, dump
@@ -129,7 +130,7 @@ root = tree.getroot()
 ns = '{http://uniprot.org/uniprot}' # MANDATORY PREFIX FOR ANY SEARCH within document
 # Store all entries aka proteins in a list of xml nodes
 proteins = root.findall(ns + 'entry')
-# Display the xml subtree of the first protein 
+# Display the xml subtree of the first protein
 dump(proteins[0])
 ```
 
@@ -157,6 +158,7 @@ Les nombres d'occurences de tous les termes GO trouvés dans le protéome de E.c
 4. Visualiser interactivement les pathways plus enrichis.
 
 ### Description statistique des Fold Change
+
 La lecture des données au format tabulé est l'occasion de se familliariser avec la [librairie pandas](https://pandas.pydata.org).
 
 ##### Lecture de données
@@ -170,35 +172,65 @@ df = pandas.read_csv()
 ```
 
 Quel est le type de l'objet `df`?
+
 ```
+pandas.core.frame.DataFrame
 
 ```
 
 ##### Descriptions d'une table de données
+
 Que permettent les méthodes suivantes?
+
 ###### df.shape
+
 ```
+(2024, 7)
 ```
+
+Avoir la forme du tableau.
+Table of 2024 rows × 7 columns.
+
 ###### df.head()
+
 ```
+5 premières lignes du tableau.
 ```
+
 ###### df.tail()
+
 ```
+5 dernières lignes du tableau.
 ```
+
 ###### df.columns
+
 ```
+Nom des colonnes.
 ```
+
 ###### df.dtypes
+
 ```
+Types des colonnes.
 ```
+
 ###### df.info
+
 ```
+Résumé du tableau.
 ```
+
 ###### df.describe()
+
 ```
+Génère des stastistiques sur le jeu de donnée.
 ```
+
 ###### df.dropna()
+
 ```
+Enlève les valeurs manquantes.
 ```
 
 ##### Accès aux éléments d'une table de données
@@ -208,6 +240,7 @@ values = df[['Description', 'Gene Symbol']]
 ```
 
 Quel est le type de `values` ?
+pandas.core.frame.DataFrame avec des colonnes de types object.
 
 Verifiez si certaines méthodes de `DataFrame` lui sont applicables.
 Ce type supporte l'accès par indice et les slice `[a:b]`
@@ -216,34 +249,38 @@ Ce type supporte l'accès par indice et les slice `[a:b]`
 
 On peut accéder aux valeurs du DataFrame via des indices ou plages d'indice. La structure se comporte alors comme une matrice. La cellule en haut et à gauche est de coordonnées (0,0).
 Il y a différentes manières de le faire, l'utilisation de `.iloc[slice_ligne,slice_colonne]` constitue une des solutions les plus simples. N'oublions pas que shape permet d'obtenir les dimensions (lignes et colonnes) du DataFrame.
-###### Acceder aux cinq premières lignes de toutes les colonnes
-```python
 
+###### Acceder aux cinq premières lignes de toutes les colonnes
+
+```python
+values.head()
 ```
 
 ###### Acceder à toutes les lignes de la dernière colonne
-```python
 
+```python
+values.iloc[:,-1]
 ```
 
 ###### Acceder aux cinq premières lignes des colonnes 0, 2 et 3
-```python
 
+```python
+df.head().iloc[:,[0,2,3]]
 ```
 
 ##### Conversion de type
 
 Le type des valeurs d'une colonne peut être spécifiée:
 
-* à la lecture
+- à la lecture
 
 ```python
-pandas.read_csv('data/TCL_wt1.tsv', sep="\t",  dtype = {'Accession': str, 'Description': str, 'Gene Symbol': str, 
-                                                 'Corrected Abundance ratio (1.53)': np.float,  'Log2 Corrected Abundance Ratio': np.float, 
+pandas.read_csv('data/TCL_wt1.tsv', sep="\t",  dtype = {'Accession': str, 'Description': str, 'Gene Symbol': str,
+                                                 'Corrected Abundance ratio (1.53)': np.float,  'Log2 Corrected Abundance Ratio': np.float,
                                                  'Abundance Ratio Adj. P-Value: (127. T3 Tc WT) / (126. T0 WT)': np.float, '-LOG10 Adj.P-val': np.float})
 ```
 
-* modifiée à la volée
+- modifiée à la volée
 
 ```python
 df = df.astype({'Log2 Corrected Abundance Ratio': float, '-LOG10 Adj.P-val': float } )
@@ -254,21 +291,22 @@ On peut specifier la chaine de caractères correspondant au valeurs "incorrectes
 ```python
 pandas.read_csv('data/TCL_wt1.tsv', sep="\t", na_values="#VALEUR!")
 ```
+
 ##### Selection avec contraintes
+
 La méthode `loc` permet de selectionner toutes les lignes/colonnes respectant certaines contraintes
 
-* Contraintes de valeurs continues
+- Contraintes de valeurs continues
 
 ```python
 df.loc[(df['-LOG10 Adj.P-val'] > 0 )  & (df['Log2 Corrected Abundance Ratio'] > 0.0 ) ]
 ```
 
-* Contraintes de valeurs discrètes
+- Contraintes de valeurs discrètes
 
 ```python
 df.loc[ df['Gene Symbol'].isin(['fadR', 'arcA'] ) ]
 ```
-
 
 #### Appliquons ces outils à l'analyse de données protéomique
 
@@ -278,14 +316,15 @@ df.loc[ df['Gene Symbol'].isin(['fadR', 'arcA'] ) ]
 
 <!-- ##### 3. A partir de cette échantillon de ratio d'abondance,  estimez la moyenne <img src="https://render.githubusercontent.com/render/math?math=\mu"> et l'ecart-type <img src="https://render.githubusercontent.com/render/math?math=\sigma"> d'une loi normale. -->
 
-##### 3. A partir de cette échantillon de ratio d'abondance,  estimez la moyenne $\mu$ et l'ecart-type $\sigma$ d'une loi normale.
+##### 3. A partir de cette échantillon de ratio d'abondance, estimez la moyenne $\mu$ et l'ecart-type $\sigma$ d'une loi normale.
+
 ```
-
-
+mean = np.mean(df.iloc[:,4])
+std = np.std(df.iloc[:,4])
+(np.float64(-0.6467130248461945), np.float64(0.46711093152335187))
 ```
 
 ##### 4. Superposez la densité de probabilité de cette loi sur l'histogramme. Attention, la densité de probabilité devra être mis à l'echelle de l'histogramme (cf ci-dessous)
-
 
 ```python
 # _ est le vecteur des valeurs d'abondance
@@ -297,13 +336,12 @@ scale = len(_)*dx # scale accordingly
 ax.plot(x, norm.pdf(x, mu, sigma)*scale) # compute theoritical PDF and draw it
 ```
 
-![Histogramme à inserez ici](histogram_log2FC.png "Title")
+![Histogramme](histogram_log2FC.png "Log2 Corrected Abundance Ratio histogram")
 
 ##### 5. Quelles remarques peut-on faire à l'observation de l'histogramme et de la loi théorique?
 
 ```
-
-
+L'histogramme ne parait pas suivre exactement la loi normale.
 ```
 
 #### Construction d'un volcano plot
@@ -311,10 +349,11 @@ ax.plot(x, norm.pdf(x, mu, sigma)*scale) # compute theoritical PDF and draw it
 ##### A l'aide de la méthode [scatter](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.scatter.html) representer $\text{Log}_{10}({\text{p-value}}) = f(\text{Log}_2(\text{abundance ratio}))$
 
 ##### Matérialisez le quadrant des protéines surabondantes, par deux droites ou un rectangle
+
 Sont condidérées comme surabondantes les proteines remplissant ces deux critères:
 
-* $\text{Log}_2(\text{abundance ratio})\gt\mu%2B\sigma$
-* $\text{p-value}<0.001$
+- $\text{Log}_2(\text{abundance ratio})\gt\mu%2B\sigma$
+- $\text{p-value}<0.001$
 
 ![Volcano plot + quadrant à inserez ici](histogram_log2FC.png "Title")
 
@@ -325,7 +364,8 @@ Nous allons implementer une approche ORA (Over Representation Analysis) naive.
 ##### 1. Retrouver les entrées du fichier TSV des protéines surabondantes
 
 Quelles sont leurs identifiants UNIPROT ?
-``` 
+
+```
 
 
 
@@ -353,7 +393,7 @@ def getAccessionGOTerms(xmlFile, accession):
     tree = parse(xmlFile)
     root = tree.getroot()
     ns = '{http://uniprot.org/uniprot}'
-    
+
     match_go_terms = []
     proteins = root.findall(ns + 'entry')
     for entry in proteins:
@@ -371,8 +411,10 @@ def getAccessionGOTerms(xmlFile, accession):
     return match_go_terms
 getAccessionGOTerms("./data/uniprot-proteome_UP000000625.xml", "P0A8V6")
 ```
+
 A l'aide de cette fonction, il devrait être possible de construire le dictonnaire des termes GO de toutes les protéines surabondantes précedemment identifiées.
 Ce dictionnaire pourrait être de la forme suivante:
+
 ```python
 {'GO:0005829': {'ID'        : 'GO:0005829',
                 'name'      : 'C:cytosol',
@@ -384,34 +426,34 @@ Ce dictionnaire pourrait être de la forme suivante:
                 }
   }
 ```
+
 Vous implémenterez la construction de ce dictionnaire et ainsi stockerez, pour la suite de l'analyse, les représentations des termes GO parmi les protéines surabondantes.
 
 #### 3. Obtention des paramètres du modèle
 
 Nous évaluerons la significativité de la présence de tous les termes GO portés par les protéines surabondantes à l'aide d'un [modèle hypergéometrique](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.hypergeom.html).
 
-Si k protéines surabondantes porte un terme GO, la pvalue de ce terme sera équivalente à  $P(X\ge k | X \sim H(k,K,n,N) )$
+Si k protéines surabondantes porte un terme GO, la pvalue de ce terme sera équivalente à $P(X\ge k | X \sim H(k,K,n,N) )$
 
 Completer le tableau ci-dessous avec les quantités vous semblant adéquates pour modeliser la pvalue de **chaque pathway [termes GO]**
 
-| Symboles | Paramètres | Quantités Biologiques |
-| --- | --- | --- |
-| k | nombre de succès observés| |
-| K | nombre de succès possibles| |
-| n | nombre d'observations| |
-| N | nombre d'elements observables| |
+| Symboles | Paramètres                    | Quantités Biologiques |
+| -------- | ----------------------------- | --------------------- |
+| k        | nombre de succès observés     |                       |
+| K        | nombre de succès possibles    |                       |
+| n        | nombre d'observations         |                       |
+| N        | nombre d'elements observables |                       |
 
 #### 4. Calcul de l'enrichissement en fonction biologiques
 
 A l'aide du contenu de `data/EColiK12_GOcounts.json` parametrez la loi hypergeometrique et calculez la pvalue
 de chaque terme GO portés par les protéines surabondantes. Vous reporterez ces données dans le tableau ci-dessous
 
-| identifiant GO | définition | occurence | pvalue|
-|---|---|---|---|
-|   |   |   |   |
+| identifiant GO | définition | occurence | pvalue |
+| -------------- | ---------- | --------- | ------ |
+|                |            |           |        |
 
 Quelle interpretation biologique faites-vous de cet enrichissement en termes GO ?
-
 
 ### Analyse des interactions répertoriées dans STRING
 
@@ -419,14 +461,12 @@ Quelle interpretation biologique faites-vous de cet enrichissement en termes GO 
 
 Dans le menu de gauche, sélectionner 'Multiple proteins'.
 
-Copier-coller les identifiants Uniprot des 
+Copier-coller les identifiants Uniprot des
 protéines sur-exprimées et spécifier l'organisme 'Escherichia coli K-12".
 
 Valider le mapping produit par STRING en clickant sur 'Continue'.
 
-
 #### Visualisation du réseau dans STRING
-
 
 Combien d'interactions contient ce réseau ?
 
@@ -437,15 +477,14 @@ Combien d'interactions contient ce réseau ?
 
 ```
 
-
 Faire varier les paramètres de visualisation du réseau dans 'Settings' pour afficher le réseau fonctionnel
 ou physique avec différents indices de confiance.
-
 
 Combien d'interactions sont supportées par chaque source ('Textmining', 'Experiments', 'Databases','Co-expression',
 'Neighborhood', 'Gene Fusion', 'Co-occurence') ?
 
 Hint: l'onglet Analysis, donne accès aux nombre des interactions du réseau.
+
 ```
 
 
@@ -455,26 +494,29 @@ Hint: l'onglet Analysis, donne accès aux nombre des interactions du réseau.
 
 #### Analyse du réseau des protéines sur-exprimées dans le contexte du réseau global.
 
-Consulter la rubrique 'Network Stats' dans l'onglet Analysis. 
+Consulter la rubrique 'Network Stats' dans l'onglet Analysis.
 
 Que peut-on en conclure sur les interactions de ce petit ensemble de protéines ?
-```
-
-
-
 
 ```
 
-Afin de replacer ces protéines dans le contexte du réseau d'interaction global de E. coli, 
+
+
+
+```
+
+Afin de replacer ces protéines dans le contexte du réseau d'interaction global de E. coli,
 ajouter les interacteurs de la première et de la deuxième couche.
 
 Que pouvez-vous en déduire sur les mécanismes activés par la présente de tétracycline ?
-```
-
-
-
 
 ```
+
+
+
+
+```
+
 #### Analyse de sur-représentation des termes GO
 
 Consulter l'analyse de sur-représention des termes GO présents dans l'onglet 'Analysis'.
@@ -486,8 +528,6 @@ Est-ce cohérent avec votre analyse précédente ?
 
 
 ```
-
-
 
 ### Construction de réseaux d'interactions à partir de données MITAB.
 
@@ -520,10 +560,9 @@ nx.draw(G, pos, with_labels=True, node_color=['blue','blue','red'] , node_size=2
 
 Les positions des noeuds sont paramétrables au travers de l'objet [layout](https://networkx.org/documentation/stable/reference/generated/networkx.drawing.layout.spring_layout.html). Une fois une première représentation du réseau obtenue, affinez celle-ci afin de:
 
-* colorier dans une couleur spécifique uniquement les protéines surabondantes dans l'expérience.
-* Écrire les identifiants uniprot dans les noeuds du réseau.
-* colorier les protéines appartenant à des classes GO communes.
-* Faire du diamètre des noeuds une fonction du nombre de partenaires protéiques.
-* N'afficher que les noeuds des protéines mesurées dans l'experience
-* Utiliser une échelle de couleur continue fonction de l'abondance pour colorier les noeuds
-
+- colorier dans une couleur spécifique uniquement les protéines surabondantes dans l'expérience.
+- Écrire les identifiants uniprot dans les noeuds du réseau.
+- colorier les protéines appartenant à des classes GO communes.
+- Faire du diamètre des noeuds une fonction du nombre de partenaires protéiques.
+- N'afficher que les noeuds des protéines mesurées dans l'experience
+- Utiliser une échelle de couleur continue fonction de l'abondance pour colorier les noeuds
